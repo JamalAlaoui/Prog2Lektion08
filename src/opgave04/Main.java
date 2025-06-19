@@ -10,14 +10,52 @@ public class Main {
     }
 
     public static ArrayList<Integer> mergeSort(ArrayList<Integer> list) {
-        //TODO
-        return null;
+        //TODO --- base casen for mergesort er når en liste indeholder 1 eller 0 elementer
+
+        if (list.size() <= 1) {
+            return list;
+        }
+        int mid = list.size() / 2;
+        ArrayList<Integer> left = new ArrayList<>(list.subList(0, mid));
+        ArrayList<Integer> right = new ArrayList<>(list.subList(mid, list.size()));
+
+        ArrayList<Integer> sortedLeft = mergeSort(left);
+        ArrayList<Integer> sortedRight = mergeSort(right);
+
+        return merge(sortedLeft, sortedRight);
     }
 
 
     private static ArrayList<Integer> merge(ArrayList<Integer> list1, ArrayList<Integer> list2) {
         //TODO
-        return null;
+
+
+        // Total fletning
+        ArrayList<Integer> results = new ArrayList<>();
+        int i1 = 0;
+        int i2 = 0;
+
+        while (i1 < list1.size() && i2 < list2.size()) {
+
+            if (list1.get(i1) < list2.get(i2)) {
+                results.add(list1.get(i1));
+                i1++;
+            } else {
+                results.add(list2.get(i2));
+                i2++;
+            }
+        }
+        // tøm det resterende
+
+        while (i1 < list1.size()) {
+            results.add(list1.get(i1));
+            i1++;
+        }
+        while (i2 < list2.size()) {
+            results.add(list2.get(i2));
+            i2++;
+        }
+        return results;
     }
 
 }
